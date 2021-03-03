@@ -1,0 +1,37 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+    <h3>Вопрос:</h3>
+    <div class="my-4">
+        {{ object.text }}
+    </div>
+    <hr/>
+    <h3>Ваши подсказки:</h3>
+    {% for group_hint in hints %}
+        <div>
+            {{ group_hint.hint.text }}
+        </div>
+    {% endfor %}
+    <form method="post" action="{% url "quiz:require_hint" object.id %}">
+        {% csrf_token %}
+        <button class="btn btn-secondary">Запросить подсказку</button>
+    </form>
+    <hr/>
+    <h3>Ваши варианты ответа:</h3>
+    {% for answer in answers %}
+        <div class="{% if answer.is_correct %}text-success{% else %}text-danger{% endif %}">
+            <span>{% if answer.is_correct %}Правильный ответ:{% else %}Неправильный ответ:{% endif %}</span>
+            {{ answer.text }}
+        </div>
+    {% endfor %}
+    <div>
+        <form method="post" action="{% url "quiz:answer" object.id %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_text">Ваш ответ:</label>
+                <textarea id="id_text" name="text" class="form-control"></textarea>
+            </div>
+            <button class="btn btn-primary">Отправить ответ</button>
+        </form>
+    </div>
+{% endblock %}

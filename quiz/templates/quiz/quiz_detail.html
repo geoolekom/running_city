@@ -1,0 +1,12 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+    <div>
+        <h2>{{ object.title }}</h2>
+        {% for question in object.question_set.all %}
+            <div>
+                <a href="{% url "quiz:question_detail" question.pk %}">{{ question.text }}</a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

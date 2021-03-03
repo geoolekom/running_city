@@ -2,4 +2,11 @@
 
 {% block content %}
     <h1>Добро пожаловать в "Бегущий город"!</h1>
+    <br/>
+    <h2>Доступные игры:</h2>
+    {% for quiz in quiz_list %}
+        <div>
+            <a href="{% url "quiz:quiz_detail" quiz.pk %}">{{ quiz.title }}</a>
+        </div>
+    {% endfor %}
 {% endblock %}
