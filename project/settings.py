@@ -31,7 +31,9 @@ if DEBUG:
         "debug_toolbar",
     ]
 
-PROJECT_APPS = []
+PROJECT_APPS = [
+    "quiz.apps.QuizConfig",
+]
 
 INSTALLED_APPS = PROJECT_APPS + DJANGO_APPS
 
