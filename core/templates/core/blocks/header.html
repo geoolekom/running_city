@@ -9,6 +9,7 @@
             <a href="{% url "core:logout" %}" class="btn btn-primary">Выход</a>
         {% else %}
             <a href="{% url "core:login" %}" class="btn btn-primary">Вход</a>
+            <a href="{% url "core:register" %}" class="btn btn-secondary ml-2">Регистрация</a>
         {% endif %}
     </div>
 </nav>
