@@ -33,6 +33,7 @@ if DEBUG:
     ]
 
 PROJECT_APPS = [
+    "core.apps.CoreConfig",
     "quiz.apps.QuizConfig",
 ]
 
@@ -110,3 +111,6 @@ STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(PROJECT_DIR, "static")
 
 MEDIA_URL = "/media/"
+
+LOGIN_URL = "/login/"
+LOGIN_REDIRECT_URL = "/"

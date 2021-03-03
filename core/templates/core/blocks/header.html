@@ -1,0 +1,14 @@
+{% load static %}
+<nav class="navbar navbar-expand-sm navbar-light">
+    <a class="navbar-brand mr-auto" href="{% url 'core:index' %}">
+        <img alt="СервисПоиск" src="{% static 'core/img/logo.png' %}" height="60">
+    </a>
+    <div class="navbar-nav">
+        {% if user.is_authenticated %}
+            <span class="px-4">Вы вошли как {{ user.username }}</span>
+            <a href="{% url "core:logout" %}" class="btn btn-primary">Выход</a>
+        {% else %}
+            <a href="{% url "core:login" %}" class="btn btn-primary">Вход</a>
+        {% endif %}
+    </div>
+</nav>

@@ -1,0 +1,38 @@
+{% load bootstrap4 %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8">
+    <title>{% block title %}Бегущий город{% endblock %}</title>
+
+    {% bootstrap_css %}
+    {% block css %}{% endblock %}
+
+    {% bootstrap_javascript jquery='full' %}
+    {% block js %}{% endblock %}
+</head>
+<body>
+    {% block body %}
+    <header>
+        {% block nav %}
+            {% include 'core/blocks/header.html' %}
+        {% endblock %}
+    </header>
+    <main>
+        <div class="container my-4">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </main>
+
+    <footer>
+        {% include 'core/blocks/footer.html' %}
+    </footer>
+    {% endblock %}
+
+    {% block body_js %}{% endblock %}
+    {% block modals %}{% endblock %}
+</body>
+</html>
