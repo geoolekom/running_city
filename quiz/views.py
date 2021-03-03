@@ -67,6 +67,7 @@ class RequireHint(LoginRequiredMixin, DetailView):
 
 
 class ResultsList(DetailView):
+    template_name = "quiz/results.html"
     model = Quiz
     queryset = Quiz.objects.all()
 
@@ -86,10 +87,25 @@ class ResultsList(DetailView):
             if correct_answer is not None:
                 correct_answer_count += 1
                 question_penalty = (
-                    correct_answer.time_spent
+                    correct_answer.time_spent.seconds
                     + (total_answers - 1) * quiz.mistake_penalty
                     + total_hints * quiz.hint_penalty
                 )
                 penalty += question_penalty
 
-        return correct_answer_count, -penalty
+        return correct_answer_count, penalty
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        groups = Group.objects.all()
+        data_groups = []
+        for group in groups:
+            correct_answer_count, penalty = self.get_score(group)
+            data_group = {"name": group.name, "correct_answer_count": correct_answer_count, "penalty": penalty}
+            data_groups.append(data_group)
+
+        def key_func(item):
+            return -item["correct_answer_count"], item["penalty"]
+
+        context["groups"] = sorted(data_groups, key=key_func)
+        return context

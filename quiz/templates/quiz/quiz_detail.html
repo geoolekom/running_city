@@ -3,6 +3,8 @@
 {% block content %}
     <div>
         <h2>{{ object.title }}</h2>
+        <a href="{% url 'quiz:results_list' object.id %}">Таблица результатов</a>
+        <hr/>
         {% for question in object.question_set.all %}
             <div>
                 <a href="{% url "quiz:question_detail" question.pk %}">{{ question.text }}</a>

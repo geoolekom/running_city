@@ -1,0 +1,27 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+    <h3>{{ quiz.title }} - Результаты</h3>
+    <div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th class="text-center" style="width: 5%;">№</th>
+                    <th class="text-center">Название команды</th>
+                    <th class="text-center" style="width: 10%">Количество правильных ответов</th>
+                    <th class="text-center" style="width: 10%">Штрафное время</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for group in groups %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ group.name }}</td>
+                        <td>{{ group.correct_answer_count }}</td>
+                        <td>{{ group.penalty }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
